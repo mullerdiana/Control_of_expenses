@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import "./ExpenseForm.css";
 
-export const ExpenseForm = () => {
+// function onSaveExpenseData as a prop to comunicate up expenseData, wich is passed as a parameter
+export const ExpenseForm = ({onSaveExpenseData}) => {
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
     enteredAmount: "",
@@ -24,7 +25,7 @@ export const ExpenseForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const expenseData = userInput;
-    console.log(expenseData);
+    onSaveExpenseData(expenseData);  //passing expense data as an argument
     setUserInput({
       enteredTitle: "",
       enteredAmount: "",
