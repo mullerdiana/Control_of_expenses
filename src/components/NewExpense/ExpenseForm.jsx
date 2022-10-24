@@ -25,6 +25,11 @@ export const ExpenseForm = () => {
     e.preventDefault();
     const expenseData = userInput;
     console.log(expenseData);
+    setUserInput({
+      enteredTitle: "",
+      enteredAmount: "",
+      enteredDate: "",
+    });
   }
 
   return (
