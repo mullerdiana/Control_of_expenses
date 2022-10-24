@@ -9,32 +9,43 @@ export const ExpenseForm = () => {
     enteredDate: "",
   });
 
-  const titleChangeHandler = (e) => {
-    setUserInput({
-      ...userInput,
-      enteredTitle: e.target.value,
+  const InputChangeHandler = (e) => {
+      const {name, value} = e.target;
+      console.log('enteredTitle',userInput.enteredTitle);
+      console.log('enteredAmount',userInput.enteredAmount);
+      console.log('enteredDate',userInput.enteredDate);
+    setUserInput((prevState)=>{
+        return {
+            ...prevState, [name]: value,
+        };
     });
-    console.log(userInput);
   };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const expenseData = userInput;
+    console.log(expenseData);
+  }
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input type="text" onChange={InputChangeHandler} name="enteredTitle" value={userInput.enteredTitle}/>
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" min="0.01" step="0.01" onChange={titleChangeHandler}/>
+          <input type="number" min="0.01" step="0.01" onChange={InputChangeHandler}  name="enteredAmount" value={userInput.enteredAmount}/>
         </div>
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" min="2019-01-01" max="2022-12-31" onChange={titleChangeHandler}/>
+          <input type="date" min="2019-01-01" max="2022-12-31" onChange={InputChangeHandler}  name="enteredDate" value={userInput.enteredDate}/>
         </div>
       </div>
 
       <div className="new-expense__actions">
-        <button type="submit">Add expense</button>
+        <button type="submit" value="Submit">Add expense</button>
       </div>
     </form>
   );
